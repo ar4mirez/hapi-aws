@@ -49,32 +49,6 @@ lab.describe('Plugin Registration', () => {
         });
     });
 
-    lab.it('it returns an error if no global config were passed.', (done) => {
-
-        register({}, (error) => {
-
-            Code.expect(error).to.exist();
-
-            return done();
-        });
-    });
-
-    lab.it('it returns an error if no services config were passed.', (done) => {
-
-        register({
-            global: {
-                accessKeyId: 'anything',
-                secretAccessKey: 'anything',
-                region: 'anything'
-            }
-        }, (error) => {
-
-            Code.expect(error).to.exist();
-
-            return done();
-        });
-    });
-
     lab.it('it returns error if wrong formed service is passed.', (done) => {
 
         register({
