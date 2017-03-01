@@ -26,7 +26,7 @@ $ npm install hapi-aws
 // Using server register.
 
 server.register({
-    register: require('hapi-aws),
+    register: require('hapi-aws'),
     options: {
         global: {
             accessKeyId: 'accessKeyId',
