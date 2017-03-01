@@ -1,0 +1,56 @@
+{
+  "name": "hapi-aws",
+  "version": "0.0.0-development",
+  "description": "AWS plugin for HapiJS.",
+  "main": "lib/index.js",
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run validate"
+    },
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "scripts": {
+    "commit": "git-cz",
+    "coverage": "lab -r lcov -o coverage/lcov.info && npm t",
+    "coverage:check": "lab -t 100",
+    "coverage:local": "lab -c -r html -o ./test/artifacts/coverage.html && open ./test/artifacts/coverage.html",
+    "coverage:report": "lab -r lcov | codecov",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "setup": "npm install && npm run validate",
+    "test": "lab -c -C -L -S -t 100 -a code",
+    "validate": "npm run coverage && npm run coverage:check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:git@github.com:ar4mirez/hapi-aws.git"
+  },
+  "author": "Angel Ramirez <angel@cuemby.com>",
+  "license": "LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/ar4mirez/hapi-aws/issues"
+  },
+  "homepage": "https://github.com/ar4mirez/hapi-aws",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "code": "3.x.x",
+    "codecov": "^1.0.1",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "fixpack": "^2.3.1",
+    "ghooks": "^2.0.0",
+    "hapi": "^16.1.0",
+    "lab": "11.x.x",
+    "semantic-release": "^6.3.2"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "dependencies": {
+    "async": "^2.1.5",
+    "aws-sdk": "^2.22.0"
+  }
+}
