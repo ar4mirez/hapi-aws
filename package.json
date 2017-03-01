@@ -46,9 +46,6 @@
     "lab": "11.x.x",
     "semantic-release": "^6.3.2"
   },
-  "publishConfig": {
-    "access": "restricted"
-  },
   "dependencies": {
     "async": "^2.1.5",
     "aws-sdk": "^2.22.0"
