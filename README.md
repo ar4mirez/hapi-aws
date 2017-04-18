@@ -74,10 +74,10 @@ server.register({
 ```
 
 ## AWS Supported services
-Check the following services here: [AWS Services](https://github.com/aws/aws-sdk-js#supported-services)
+Check the following services here: [AWS Services](https://github.com/aws/aws-sdk-js/blob/master/SERVICES.md)
 
 ***When passing a service please drop the AWS namespace example:***
 
-`service.name: [string]` used later to access the service like: `server.plugins['hapi-aws'].ec2Identification`
+`service.name: [string]` used later to access the service like: `server.plugins['hapi-aws'].aws.ec2Identification`
 
 `service.service: [string]` from the previous list exmple: `EC2`
