@@ -49,6 +49,25 @@ describe('Plugin Registration', () => {
 
     });
 
+    it('it returns error if required keys are not passed', async () => {
+
+        const options = {
+            global: {
+                region: 'anything'
+            },
+            services: [{
+                service: 'unknownService'
+            }]
+        };
+
+        try {
+            await register(options);
+        }
+        catch (error) {
+            Code.expect(error).to.exist();
+        }
+    });
+
     it('it returns error if wrong formed service is passed.', async () => {
 
         const options = {
