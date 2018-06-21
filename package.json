@@ -19,8 +19,7 @@
     "coverage:report": "lab -r lcov | codecov",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "setup": "npm install && npm run validate",
-    "test": "lab -c -C -L -S -t 100 -a code",
-    "validate": "npm run coverage && npm run coverage:check"
+    "test": "lab -c -C -L -S -t 100 -a code"
   },
   "repository": {
     "type": "git",
@@ -36,18 +35,20 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
-    "code": "3.x.x",
-    "codecov": "^1.0.1",
-    "commitizen": "^2.9.6",
-    "cz-conventional-changelog": "^2.0.0",
+    "code": "5.x.x",
+    "codecov": "^3.0.2",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint-config-hapi": "^12.0.0",
+    "eslint-plugin-hapi": "^4.1.0",
     "fixpack": "^2.3.1",
-    "ghooks": "^2.0.0",
-    "hapi": "^16.1.0",
-    "lab": "11.x.x",
-    "semantic-release": "^6.3.2"
+    "ghooks": "^2.0.4",
+    "hapi": "^17.5.1",
+    "lab": "15.x.x",
+    "semantic-release": "^15.6.0"
   },
   "dependencies": {
-    "async": "^2.1.5",
-    "aws-sdk": "^2.22.0"
+    "async": "^2.6.1",
+    "aws-sdk": "^2.261.1"
   }
 }
