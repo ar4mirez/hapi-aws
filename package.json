@@ -4,9 +4,6 @@
   "description": "AWS plugin for HapiJS.",
   "main": "lib/index.js",
   "config": {
-    "ghooks": {
-      "pre-commit": "npm run validate"
-    },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
@@ -18,7 +15,7 @@
     "coverage:local": "lab -c -r html -o ./test/artifacts/coverage.html && open ./test/artifacts/coverage.html",
     "coverage:report": "lab -r lcov | codecov",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "setup": "npm install && npm run validate",
+    "setup": "npm install",
     "test": "lab -c -C -L -S -t 100 -a code"
   },
   "repository": {
@@ -42,7 +39,6 @@
     "eslint-config-hapi": "^12.0.0",
     "eslint-plugin-hapi": "^4.1.0",
     "fixpack": "^2.3.1",
-    "ghooks": "^2.0.4",
     "hapi": "^17.5.1",
     "lab": "15.x.x",
     "semantic-release": "^15.6.0"
