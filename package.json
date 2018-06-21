@@ -44,7 +44,6 @@
     "semantic-release": "^15.6.0"
   },
   "dependencies": {
-    "async": "^2.6.1",
     "aws-sdk": "^2.261.1"
   }
 }
