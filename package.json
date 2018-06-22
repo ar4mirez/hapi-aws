@@ -28,22 +28,18 @@
     "url": "https://github.com/ar4mirez/hapi-aws/issues"
   },
   "homepage": "https://github.com/ar4mirez/hapi-aws",
-  "engines": {
-    "node": ">=4.0.0"
-  },
   "devDependencies": {
-    "code": "5.x.x",
+    "code": "^5.2.0",
     "codecov": "^3.0.2",
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
     "eslint-config-hapi": "^12.0.0",
     "eslint-plugin-hapi": "^4.1.0",
-    "fixpack": "^2.3.1",
     "hapi": "^17.5.1",
-    "lab": "15.x.x",
+    "lab": "^15.5.0",
     "semantic-release": "^15.6.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.261.1"
+    "aws-sdk": "^2.262.1"
   }
 }
