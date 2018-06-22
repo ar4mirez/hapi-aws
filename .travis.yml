@@ -10,6 +10,7 @@ node_js:
   - '8'
 before_script:
   - npm prune
+  - npm i -g lab code semantic-release
 after_success:
   - npm run coverage:report
   - npm run semantic-release
