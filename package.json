@@ -1,6 +1,6 @@
 {
   "name": "hapi-aws",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "AWS plugin for HapiJS.",
   "main": "lib/index.js",
   "config": {
