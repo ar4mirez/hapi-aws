@@ -9,28 +9,27 @@ const Pkg = require('../package.json');
 
 const lab = exports.lab = Lab.script();
 
+const { describe, it, beforeEach } = lab;
+
 let server;
 
-const register = (options, callback) => {
+const register = async (options) => {
 
-    server.register({
-        register: Plugin,
+    await server.register({
+        plugin: Plugin,
         options
-    }, callback);
+    });
 };
 
 
-lab.describe('Plugin Registration', () => {
+describe('Plugin Registration', () => {
 
-    lab.beforeEach((callback) => {
+    beforeEach(() => {
 
         server = new Hapi.Server();
-        server.connection();
-
-        return callback();
     });
 
-    lab.it('it registers successfully', (done) => {
+    it('it registers successfully', async () => {
 
         const options = {
             global: {
@@ -41,17 +40,37 @@ lab.describe('Plugin Registration', () => {
             services: []
         };
 
-        register(options, (error) => {
-
+        try {
+            await register(options);
+        }
+        catch (error) {
             Code.expect(error).to.not.exist();
+        }
 
-            return done();
-        });
     });
 
-    lab.it('it returns error if wrong formed service is passed.', (done) => {
+    it('it returns error if required keys are not passed', async () => {
 
-        register({
+        const options = {
+            global: {
+                region: 'anything'
+            },
+            services: [{
+                service: 'unknownService'
+            }]
+        };
+
+        try {
+            await register(options);
+        }
+        catch (error) {
+            Code.expect(error).to.exist();
+        }
+    });
+
+    it('it returns error if wrong formed service is passed.', async () => {
+
+        const options = {
             global: {
                 accessKeyId: 'anything',
                 secretAccessKey: 'anything',
@@ -60,17 +79,19 @@ lab.describe('Plugin Registration', () => {
             services: [{
                 service: 'unknownService'
             }]
-        }, (error) => {
+        };
 
+        try {
+            await register(options);
+        }
+        catch (error) {
             Code.expect(error).to.exist();
-
-            return done();
-        });
+        }
     });
 
-    lab.it('it successfully register and expose a service.', (done) => {
+    it('it successfully register and expose a service.', async () => {
 
-        register({
+        const options = {
             global: {
                 accessKeyId: 'anything',
                 secretAccessKey: 'anything',
@@ -80,16 +101,18 @@ lab.describe('Plugin Registration', () => {
                 name: 'codeCommit',
                 service: 'CodeCommit'
             }]
-        }, (error) => {
+        };
 
+        try {
+            await register(options);
+        }
+        catch (error) {
             const plugin = server.plugins[Pkg.name];
             Code.expect(error).to.not.exist();
             Code.expect(server).to.include('aws');
             Code.expect(plugin).to.include('aws');
             Code.expect(plugin.aws).to.include('codeCommit');
             Code.expect(plugin.aws.codeCommit).to.be.an.instanceOf(AWS.CodeCommit);
-
-            return done();
-        });
+        }
     });
 });
