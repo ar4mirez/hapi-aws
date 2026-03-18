@@ -87,7 +87,7 @@ describe('Plugin Registration', () => {
 
         await register(options);
 
-        const plugin = server.plugins[Pkg.name];
+        const plugin = server.plugins[Pkg.name] || server.plugins[Pkg.name.replace('@ar4mirez/', '')];
         expect(server.aws).to.exist();
         expect(plugin.aws).to.exist();
         expect(plugin.aws.codeCommit).to.exist();
