@@ -23,5 +23,14 @@
   },
   "scripts": {
     "test": "lab -v -c"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ar4mirez/hapi-aws.git"
+  },
+  "files": [
+    "lib/",
+    "package.json",
+    "README.md"
+  ]
 }
