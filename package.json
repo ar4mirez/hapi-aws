@@ -1,7 +1,7 @@
 {
   "name": "@ar4mirez/hapi-aws",
   "description": "AWS SDK v3 plugin for HapiJS.",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "Angel Ramirez <angel@cuemby.com>",
   "main": "lib/index.js",
   "engines": {
