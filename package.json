@@ -32,5 +32,8 @@
     "lib/",
     "package.json",
     "README.md"
-  ]
+  ],
+  "overrides": {
+    "fast-xml-parser": "^5.5.6"
+  }
 }
