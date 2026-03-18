@@ -1,45 +1,27 @@
 {
   "name": "hapi-aws",
-  "version": "2.0.0",
-  "description": "AWS plugin for HapiJS.",
-  "main": "lib/index.js",
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
-  },
-  "scripts": {
-    "commit": "git-cz",
-    "coverage": "lab -r lcov -o coverage/lcov.info && npm t",
-    "coverage:check": "lab -t 100",
-    "coverage:local": "lab -c -r html -o ./test/artifacts/coverage.html && open ./test/artifacts/coverage.html",
-    "coverage:report": "lab -r lcov | codecov",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "setup": "npm install",
-    "test": "lab -c -C -L -S -t 100 -a code"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https:git@github.com:ar4mirez/hapi-aws.git"
-  },
+  "description": "AWS SDK v3 plugin for HapiJS.",
+  "version": "3.0.0",
   "author": "Angel Ramirez <angel@cuemby.com>",
-  "license": "LICENSE.md",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "bugs": {
     "url": "https://github.com/ar4mirez/hapi-aws/issues"
   },
-  "homepage": "https://github.com/ar4mirez/hapi-aws",
-  "devDependencies": {
-    "code": "^5.2.0",
-    "codecov": "^3.0.2",
-    "commitizen": "^2.10.1",
-    "cz-conventional-changelog": "^2.1.0",
-    "eslint-config-hapi": "^12.0.0",
-    "eslint-plugin-hapi": "^4.1.0",
-    "hapi": "^17.5.1",
-    "lab": "^15.5.0",
-    "semantic-release": "^15.6.0"
-  },
+  "homepage": "https://github.com/ar4mirez/hapi-aws#readme",
+  "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.262.1"
+    "@aws-sdk/client-codecommit": "^3.0.0",
+    "joi": "^17.13.3"
+  },
+  "devDependencies": {
+    "@hapi/code": "^9.0.3",
+    "@hapi/hapi": "^21.4.4",
+    "@hapi/lab": "^26.0.0"
+  },
+  "scripts": {
+    "test": "lab -v -c"
   }
 }
