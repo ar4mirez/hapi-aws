@@ -1,15 +1,14 @@
 'use strict';
 
-const Lab = require('lab');
-const Code = require('code');
-const Hapi = require('hapi');
-const AWS = require('aws-sdk');
+const Lab = require('@hapi/lab');
+const Code = require('@hapi/code');
+const Hapi = require('@hapi/hapi');
+const { CodeCommitClient } = require('@aws-sdk/client-codecommit');
 const Plugin = require('..');
 const Pkg = require('../package.json');
 
-const lab = exports.lab = Lab.script();
-
-const { describe, it, beforeEach } = lab;
+const { describe, it, beforeEach } = exports.lab = Lab.script();
+const { expect } = Code;
 
 let server;
 
@@ -21,10 +20,9 @@ const register = async (options) => {
     });
 };
 
-
 describe('Plugin Registration', () => {
 
-    beforeEach(() => {
+    beforeEach(async () => {
 
         server = new Hapi.Server();
     });
@@ -33,86 +31,66 @@ describe('Plugin Registration', () => {
 
         const options = {
             global: {
-                accessKeyId: 'anything',
-                secretAccessKey: 'anything',
-                region: 'anything'
+                region: 'us-east-1'
             },
             services: []
         };
 
-        try {
-            await register(options);
-        }
-        catch (error) {
-            Code.expect(error).to.not.exist();
-        }
-
+        await register(options);
     });
 
-    it('it returns error if required keys are not passed', async () => {
+    it('it registers successfully with credentials', async () => {
 
         const options = {
             global: {
-                region: 'anything'
+                credentials: {
+                    accessKeyId: 'anything',
+                    secretAccessKey: 'anything'
+                },
+                region: 'us-east-1'
             },
-            services: [{
-                service: 'unknownService'
-            }]
+            services: []
         };
 
-        try {
-            await register(options);
-        }
-        catch (error) {
-            Code.expect(error).to.exist();
-        }
+        await register(options);
     });
 
-    it('it returns error if wrong formed service is passed.', async () => {
+    it('it returns error if service is missing required client', async () => {
 
         const options = {
-            global: {
-                accessKeyId: 'anything',
-                secretAccessKey: 'anything',
-                region: 'anything'
-            },
-            services: [{
-                service: 'unknownService'
-            }]
+            global: { region: 'us-east-1' },
+            services: [{ name: 'myService' }]
         };
 
+        let err;
         try {
             await register(options);
         }
-        catch (error) {
-            Code.expect(error).to.exist();
+        catch (e) {
+            err = e;
         }
+
+        expect(err).to.exist();
     });
 
-    it('it successfully register and expose a service.', async () => {
+    it('it successfully registers and exposes a pre-instantiated service client', async () => {
+
+        const client = new CodeCommitClient({ region: 'us-east-1' });
 
         const options = {
-            global: {
-                accessKeyId: 'anything',
-                secretAccessKey: 'anything',
-                region: 'anything'
-            },
+            global: { region: 'us-east-1' },
             services: [{
                 name: 'codeCommit',
-                service: 'CodeCommit'
+                client
             }]
         };
 
-        try {
-            await register(options);
-        }
-        catch (error) {
-            const plugin = server.plugins[Pkg.name];
-            Code.expect(error).to.not.exist();
-            Code.expect(server).to.include('aws');
-            Code.expect(plugin).to.include('aws');
-            Code.expect(plugin.aws).to.include('codeCommit');
-            Code.expect(plugin.aws.codeCommit).to.be.an.instanceOf(AWS.CodeCommit);
-        }
+        await register(options);
+
+        const plugin = server.plugins[Pkg.name];
+        expect(server.aws).to.exist();
+        expect(plugin.aws).to.exist();
+        expect(plugin.aws.codeCommit).to.exist();
+        expect(plugin.aws.codeCommit).to.be.an.instanceof(CodeCommitClient);
     });
 });
