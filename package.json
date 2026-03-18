@@ -1,5 +1,5 @@
 {
-  "name": "hapi-aws",
+  "name": "@ar4mirez/hapi-aws",
   "description": "AWS SDK v3 plugin for HapiJS.",
   "version": "3.0.0",
   "author": "Angel Ramirez <angel@cuemby.com>",
